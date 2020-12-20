@@ -7,10 +7,17 @@
  */
 
 import React, {Component} from 'react';
-import {Image, StyleSheet, Text, View, TextInput, ScrollView, Button} from 'react-native';
+import {Image, StyleSheet, Text, View, TextInput, ScrollView, Button, DeviceEventEmitter} from 'react-native';
 import AlertModule from './custom_native/AlertModule';
 const data = 'https://p3.ssl.qhimgs1.com/sdr/_240_/t017a90c496eb0c4593.jpg';
 export default class App extends Component{
+
+	componentDidMount(){
+		DeviceEventEmitter.addListener('testLsxEvent', (msg) => {
+			console.log(JSON.stringify(msg));
+		});
+	}
+
 	handleHelloWorldPress = () => {
 		this.alertCallback();
 	}
@@ -22,6 +29,8 @@ export default class App extends Component{
 	alertCallback = () => {
 		AlertModule.alertCallback('wo shi lishanxin', (msg) => {console.log(msg);});
 	}
+
+
 
 	render() {
 		return (
