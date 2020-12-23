@@ -9,6 +9,7 @@
 import React, {Component} from 'react';
 import {Image, StyleSheet, Text, View, TextInput, ScrollView, Button, DeviceEventEmitter} from 'react-native';
 import AlertModule from './custom_native/AlertModule';
+import NavigationModule from './custom_native/NavigationModule';
 const data = 'https://p3.ssl.qhimgs1.com/sdr/_240_/t017a90c496eb0c4593.jpg';
 export default class App extends Component{
 
@@ -30,6 +31,9 @@ export default class App extends Component{
 		AlertModule.alertCallback('wo shi lishanxin', (msg) => {console.log(msg);});
 	}
 
+	handleNavigateToMiniProgram = () => {
+		NavigationModule.navigateToMiniProgram('http://tesst.duochang.cc/ota-file/QDBLD/1608706244419.zip');
+	}
 
 
 	render() {
@@ -37,6 +41,7 @@ export default class App extends Component{
 			<ScrollView >
 				<View style={styles.container}>
 					<Text style={styles.welcome} onPress={this.handleHelloWorldPress}>Hello, world!</Text>
+					<Text style={styles.welcome} onPress={this.handleNavigateToMiniProgram}>小程序</Text>
 					<Image style={{height:100, width:100}} source={{uri:data}} />
 					<TextInput style={{
 						width:'100%', backgroundColor:'grey'}} />

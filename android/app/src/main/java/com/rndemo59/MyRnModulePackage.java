@@ -1,9 +1,11 @@
-package com.rndemo59.native_js_bridge;
+package com.rndemo59;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
+import com.rndemo59.mini_program.NavigationModule;
+import com.rndemo59.native_js_bridge.AlertModule;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,7 +20,7 @@ public class MyRnModulePackage implements ReactPackage {
     List<NativeModule> modules = new ArrayList<>();
 
     modules.add(new AlertModule(reactContext));
-
+    modules.add(new NavigationModule(reactContext));
     return modules;
   }
 
