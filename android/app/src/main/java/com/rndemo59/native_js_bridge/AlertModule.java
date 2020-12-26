@@ -47,7 +47,9 @@ public class AlertModule extends ReactContextBaseJavaModule {
     AlertDialog.Builder dialogBuilder = new  AlertDialog.Builder(getCurrentActivity());
     dialogBuilder.setMessage(message);
     dialogBuilder.setOnCancelListener(dialogInterface -> {callback.invoke("alertCallback cancel");});
-    dialogBuilder.setPositiveButton("ok", (dialog, which) -> {callback.invoke("alertCallback ok");});
+    dialogBuilder.setPositiveButton("ok", (dialog, which) -> {
+      getReactApplicationContext().getJSModule(TestJavaToJavascript.class).testMethod("测试 java run js");
+      callback.invoke("alertCallback ok");});
     dialogBuilder.create().show();
   }
 

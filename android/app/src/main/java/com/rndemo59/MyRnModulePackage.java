@@ -6,6 +6,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 import com.rndemo59.mini_program.NavigationModule;
 import com.rndemo59.native_js_bridge.AlertModule;
+import com.rndemo59.native_js_bridge.TestJavaToJavascript;
 
 import java.util.ArrayList;
 import java.util.Collections;
