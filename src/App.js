@@ -7,11 +7,12 @@
  */
 
 import React, {Component} from 'react';
-import {Image, StyleSheet, Text, View, TextInput, ScrollView, Button, DeviceEventEmitter} from 'react-native';
+import {Image, StyleSheet, Text, View, TextInput, ScrollView, Button, DeviceEventEmitter, UIManager, findNodeHandle} from 'react-native';
 import AlertModule from './custom_native/AlertModule';
 import NavigationModule from './custom_native/NavigationModule';
 import MyCustomImageView from './custom_native/MyCutomImageView';
 const data = 'https://p3.ssl.qhimgs1.com/sdr/_240_/t017a90c496eb0c4593.jpg';
+
 export default class App extends Component{
 
 	componentDidMount(){
@@ -36,16 +37,40 @@ export default class App extends Component{
 		NavigationModule.navigateToMiniProgram('http://tesst.duochang.cc/ota-file/QDBLD/1608706244419.zip');
 	}
 
+	// 接收从Java传过来的事件
+	handleOnChange = (event) => {
+		console.log("JSLog", JSON.stringify(event.nativeEvent))
+	}
+
+	// 向Java发送事件
+	hideIcon = () => {
+		UIManager.dispatchViewManagerCommand(
+			findNodeHandle(this.myCustomImageViewRef),
+			2,
+			null,
+		);
+	}
+
+	// 向Java发送事件
+	showIcon = () => {
+		UIManager.dispatchViewManagerCommand(
+			findNodeHandle(this.myCustomImageViewRef),
+			1,
+			null,
+		);
+	}
 	render() {
 		return (
 			<ScrollView >
 				<View style={styles.container}>
-					<Text style={styles.welcome} onPress={this.handleHelloWorldPress}>Hello, world!</Text>
-					<Text style={styles.welcome} onPress={this.handleNavigateToMiniProgram}>小程序</Text>
+					{/* <Text style={styles.welcome} onPress={this.handleHelloWorldPress}>Hello, world!</Text> */}
+					{/* <Text style={styles.welcome} onPress={this.handleNavigateToMiniProgram}>小程序</Text> */}
+					<Text style={styles.welcome} onPress={this.hideIcon}>隐藏 右上角图标</Text>
+					<Text style={styles.welcome} onPress={this.showIcon}>展示 右上角图标</Text>
 					<Image style={{height:100, width:100}} source={{uri:data}} />
 					<TextInput style={{
 						width:'100%', backgroundColor:'grey'}} />
-					<MyCustomImageView style={{height:200, width:200}} src={data}/>
+					<MyCustomImageView ref={ref => this.myCustomImageViewRef = ref} style={{height:200, width:200}} src={data} onChange={this.handleOnChange}/>
 				</View>
 			</ScrollView>
 		);
