@@ -7,6 +7,7 @@ import com.facebook.react.uimanager.ViewManager;
 import com.rndemo59.mini_program.NavigationModule;
 import com.rndemo59.native_js_bridge.AlertModule;
 import com.rndemo59.native_js_bridge.TestJavaToJavascript;
+import com.rndemo59.native_ui.MyCustomImageViewManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,6 +29,9 @@ public class MyRnModulePackage implements ReactPackage {
   @Nonnull
   @Override
   public List<ViewManager> createViewManagers(@Nonnull ReactApplicationContext reactContext) {
-    return Collections.emptyList();
+    List<ViewManager> modules = new ArrayList<>();
+
+    modules.add(new MyCustomImageViewManager());
+    return modules;
   }
 }

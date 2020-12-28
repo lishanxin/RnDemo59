@@ -10,6 +10,7 @@ import React, {Component} from 'react';
 import {Image, StyleSheet, Text, View, TextInput, ScrollView, Button, DeviceEventEmitter} from 'react-native';
 import AlertModule from './custom_native/AlertModule';
 import NavigationModule from './custom_native/NavigationModule';
+import MyCustomImageView from './custom_native/MyCutomImageView';
 const data = 'https://p3.ssl.qhimgs1.com/sdr/_240_/t017a90c496eb0c4593.jpg';
 export default class App extends Component{
 
@@ -35,7 +36,6 @@ export default class App extends Component{
 		NavigationModule.navigateToMiniProgram('http://tesst.duochang.cc/ota-file/QDBLD/1608706244419.zip');
 	}
 
-
 	render() {
 		return (
 			<ScrollView >
@@ -45,6 +45,7 @@ export default class App extends Component{
 					<Image style={{height:100, width:100}} source={{uri:data}} />
 					<TextInput style={{
 						width:'100%', backgroundColor:'grey'}} />
+					<MyCustomImageView style={{height:200, width:200}} src={data}/>
 				</View>
 			</ScrollView>
 		);

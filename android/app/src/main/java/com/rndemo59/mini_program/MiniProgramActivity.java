@@ -15,6 +15,7 @@ import com.facebook.react.bridge.NativeModuleCallExceptionHandler;
 import com.facebook.react.common.LifecycleState;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.shell.MainReactPackage;
+import com.rndemo59.MyRnModulePackage;
 import com.rndemo59.R;
 
 import java.io.BufferedInputStream;
@@ -58,12 +59,16 @@ public class MiniProgramActivity extends AppCompatActivity implements DefaultHar
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_mini_program);
+    mReactRootView = (ReactRootView) findViewById(R.id.mini_program_root_view);
+
     Intent intent = getIntent();
     if(intent == null) {
       Log.d(TAG, "intent is null, finish()");
       finish();
       return;
     }
+    // 获取bundle.zip文件加载地址
     String downloadUrl = intent.getStringExtra(URL_DOWNLOAD_KEY);
     if(downloadUrl == null){
       Log.d(TAG, "downloadUrl is null, finish()");
@@ -72,11 +77,11 @@ public class MiniProgramActivity extends AppCompatActivity implements DefaultHar
     }
     String fileDir =getFilesDir().getPath() + "/" + downloadUrl.substring(downloadUrl.lastIndexOf("/"), downloadUrl.lastIndexOf("."));
 
-    path = fileDir + "/index.android.bundle";
+    // 设置bundle文件下载后的zip存储路径
     zipFile = fileDir + "/android.bundle.zip";
-    setContentView(R.layout.activity_mini_program);
+    // 设置bundle文件存储路径
+    path = fileDir + "/index.android.bundle";
 
-    mReactRootView = (ReactRootView) findViewById(R.id.mini_program_root_view);
 
     if (new File(path).exists()) {
       setReactNative();
@@ -177,6 +182,7 @@ public class MiniProgramActivity extends AppCompatActivity implements DefaultHar
           }
         })
         .addPackage(new MainReactPackage())
+        .addPackage(new MyRnModulePackage())
         .setUseDeveloperSupport(false)
         .setInitialLifecycleState(LifecycleState.RESUMED)
         .build();
