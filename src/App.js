@@ -46,7 +46,7 @@ export default class App extends Component{
 	hideIcon = () => {
 		UIManager.dispatchViewManagerCommand(
 			findNodeHandle(this.myCustomImageViewRef),
-			2,
+			UIManager.getViewManagerConfig('MyCustomImageView').Commands.changeIconInvisible,
 			null,
 		);
 	}
@@ -55,7 +55,7 @@ export default class App extends Component{
 	showIcon = () => {
 		UIManager.dispatchViewManagerCommand(
 			findNodeHandle(this.myCustomImageViewRef),
-			1,
+			UIManager.getViewManagerConfig('MyCustomImageView').Commands.changeIconVisible,
 			null,
 		);
 	}
