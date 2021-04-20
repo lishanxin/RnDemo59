@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">RNDemo59</string>
+  <string name="app_name">RNDemo59</string>
+  <string name="facebook_app_id">341722873941268</string>
+  <string name="fb_login_protocol_scheme">fb341722873941268</string>
+
 </resources>
